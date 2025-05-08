@@ -1,4 +1,4 @@
-ARG BASE_VERSION=v2.14.10
+ARG BASE_VERSION=v2.19.10
 
 FROM semaphoreui/runner:${BASE_VERSION}
 
