@@ -1,10 +1,14 @@
-ARG BASE_VERSION=v2.14.10
+ARG BASE_VERSION
 
 FROM semaphoreui/runner:${BASE_VERSION}
 
+# renovate: datasource=github-releases depName=packer packageName=hasicorp/packer
 ARG PACKER_VERSION=1.12.0
-ARG TOFU_VERSION=1.9.1
-ARG TERRAGRUNT_VERSION=0.78.1
+# renovate: datasource=github-releases depName=opentofu packageName=opentofu/opentofu
+ARG TOFU_VERSION=1.9.0
+# renovate: datasource=github-releases depName=terragrunt packageName=gruntwork-io/terragrunt
+ARG TERRAGRUNT_VERSION=0.78.0
+
 ARG TARGETARCH
 
 USER root
