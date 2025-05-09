@@ -2,7 +2,9 @@ ARG BASE_VERSION
 
 FROM semaphoreui/runner:${BASE_VERSION}
 
-# renovate: datasource=github-releases depName=packer packageName=hasicorp/packer
+# renovate: datasource=github-releases depName=terraform packageName=hashicorp/terraform
+ARG TERRAFORM_VERSION=1.11.0
+# renovate: datasource=github-releases depName=packer packageName=hashicorp/packer
 ARG PACKER_VERSION=1.12.0
 # renovate: datasource=github-releases depName=opentofu packageName=opentofu/opentofu
 ARG TOFU_VERSION=1.9.0
