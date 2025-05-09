@@ -7,7 +7,7 @@ env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
   # renovate: datasource=github-tags depName=semaphoreui/runner versioning=semver
-  IMAGE_TAG: v2.14.9
+  IMAGE_TAG: v2.14.10
 
 jobs:
   docker:
