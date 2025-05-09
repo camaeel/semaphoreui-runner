@@ -7,7 +7,7 @@ ARG TERRAFORM_VERSION=1.11.0
 # renovate: datasource=github-releases depName=packer packageName=hashicorp/packer
 ARG PACKER_VERSION=1.12.0
 # renovate: datasource=github-releases depName=opentofu packageName=opentofu/opentofu
-ARG TOFU_VERSION=1.9.0
+ARG TOFU_VERSION=1.9.1
 # renovate: datasource=github-releases depName=terragrunt packageName=gruntwork-io/terragrunt
 ARG TERRAGRUNT_VERSION=0.78.0
 
