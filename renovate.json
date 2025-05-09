@@ -8,7 +8,7 @@
       "customType": "regex",
       "managerFilePatterns": [".github/workflows/docker.yml"],
       "matchStrings": ["IMAGE_TAG: (?<currentValue>.*?)\\n"],
-      "packageNameTemplate": "semaphoreui/runner",
+      "packageNameTemplate": "semaphoreui/semaphore",
       "datasourceTemplate": "github-releases"
     },
     {
