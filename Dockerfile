@@ -1,5 +1,5 @@
 # renovate: datasource=github-releases depName=semaphoreui packageName=semaphoreui/semaphore
-ARG BASE_VERSION=v2.14.9
+ARG BASE_VERSION=v2.14.10
 
 FROM semaphoreui/runner:${BASE_VERSION}
 
