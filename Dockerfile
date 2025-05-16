@@ -1,4 +1,5 @@
-ARG BASE_VERSION
+# renovate: datasource=github-tags depName=semaphoreui packageName=semaphoreui/semaphore
+ARG BASE_VERSION=v2.14.9
 
 FROM semaphoreui/runner:${BASE_VERSION}
 
