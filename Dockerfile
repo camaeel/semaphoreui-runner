@@ -28,12 +28,13 @@ RUN wget https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER
 
 USER 1001
 
+ENV TENV_AUTO_INSTALL=true
+ENV TENV_ROOT=/home/semaphore/.tenv
+
 RUN --mount=type=secret,id=TENV_GITHUB_TOKEN,env=TENV_GITHUB_TOKEN \
     tenv tf install && \
     tenv tg install ${TERRAGRUNT_VERSION} && \
     tenv tofu install ${TOFU_VERSION}
-
-ENV TENV_AUTO_INSTALL=true
 
 WORKDIR /home/semaphore
 
