@@ -23,10 +23,12 @@ RUN wget https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER
     rm packer_${PACKER_VERSION}_linux_${TARGETARCH}.zip && \
     chmod +x /usr/local/bin/packer && \
     apk add tenv --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing/ && \
-    apk add aws-cli && \
-    tenv tf install && \
-    tenv tg install ${TERRAGRUNT_VERSION} && \
-    tenv tofu install ${TOFU_VERSION}
+    apk add aws-cli
 
 USER 1001
 
+RUN tenv tf install && \
+    tenv tg install ${TERRAGRUNT_VERSION} && \
+    tenv tofu install ${TOFU_VERSION} \
+
+ENV TENV_AUTO_INSTALL=true
