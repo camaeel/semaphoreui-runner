@@ -29,6 +29,6 @@ USER 1001
 
 RUN tenv tf install && \
     tenv tg install ${TERRAGRUNT_VERSION} && \
-    tenv tofu install ${TOFU_VERSION} \
+    tenv tofu install ${TOFU_VERSION}
 
 ENV TENV_AUTO_INSTALL=true
