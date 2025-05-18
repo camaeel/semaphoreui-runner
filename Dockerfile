@@ -13,7 +13,6 @@ ARG TOFU_VERSION=1.9.1
 ARG TERRAGRUNT_VERSION=0.78.4
 
 ARG TARGETARCH
-#ARG TENV_GITHUB_TOKEN
 
 USER root
 
@@ -29,7 +28,8 @@ RUN wget https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER
 
 USER 1001
 
-RUN tenv tf install && \
+RUN --mount=type=secret,id=TENV_GITHUB_TOKEN,env=TENV_GITHUB_TOKEN \
+    tenv tf install && \
     tenv tg install ${TERRAGRUNT_VERSION} && \
     tenv tofu install ${TOFU_VERSION}
 

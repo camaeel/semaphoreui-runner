@@ -42,5 +42,7 @@ jobs:
         platforms: linux/amd64 #,linux/arm64
         build-args: |
           BASE_VERSION=${{ env.IMAGE_TAG }}
+        secrets: |
+          TENV_GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
         cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache
         cache-to: ${{ github.event_name != 'pull_request' && format( 'type=registry,ref={0}/{1}:buildcache,mode=max', env.REGISTRY, env.IMAGE_NAME ) || '' }}
