@@ -26,7 +26,8 @@ RUN wget https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER
     chmod +x /usr/local/bin/packer && \
     rm /usr/local/bin/terraform /usr/local/bin/tofu && \
     apk add tenv --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing/ && \
-    apk add aws-cli && \
+    # gcompat is needed for aws_signing_helper to work
+    apk add aws-cli gcompat && \
     case "${TARGETARCH}" in \
       amd64)  export AWS_ARCH="X86_64" ;; \
       arm64)  export AWS_ARCH="Aarch64" ;; \
