@@ -11,6 +11,8 @@ ARG PACKER_VERSION=1.12.0
 ARG TOFU_VERSION=1.9.1
 # renovate: datasource=github-releases depName=terragrunt packageName=gruntwork-io/terragrunt
 ARG TERRAGRUNT_VERSION=0.78.4
+# renovate: datasource=github-releases depName=aws_signing_helper packageName=aws/rolesanywhere-credential-helper
+ARG AWS_SIGNING_HELPER_VERSION=1.6.0
 
 ARG TARGETARCH
 
@@ -24,7 +26,14 @@ RUN wget https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER
     chmod +x /usr/local/bin/packer && \
     rm /usr/local/bin/terraform /usr/local/bin/tofu && \
     apk add tenv --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing/ && \
-    apk add aws-cli
+    apk add aws-cli && \
+    case "${TARGETARCH}" in \
+      amd64)  export AWS_ARCH="X86_64" ;; \
+      arm64)  export AWS_ARCH="Aarch64" ;; \
+      *)      echo "Unsupported architecture: ${TARGETARCH}" && exit 1 ;; \
+    esac && \
+    wget https://rolesanywhere.amazonaws.com/releases/${AWS_SIGNING_HELPER_VERSION}/${AWS_ARCH}/Linux/aws_signing_helper -O /usr/local/bin/aws_signing_helper && \
+    chmod a+x /usr/local/bin/aws_signing_helper
 
 USER 1001
 
