@@ -13,6 +13,8 @@ ARG TOFU_VERSION=1.9.1
 ARG TERRAGRUNT_VERSION=0.78.4
 # renovate: datasource=github-releases depName=aws_signing_helper packageName=aws/rolesanywhere-credential-helper
 ARG AWS_SIGNING_HELPER_VERSION=1.6.0
+# renovate: datasource=github-releases depName=talosctl packageName=siderolabs/talos
+ARG TALOS_VERSION=1.10.2
 
 ARG TARGETARCH
 
@@ -35,6 +37,15 @@ RUN wget https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER
     esac && \
     wget https://rolesanywhere.amazonaws.com/releases/${AWS_SIGNING_HELPER_VERSION}/${AWS_ARCH}/Linux/aws_signing_helper -O /usr/local/bin/aws_signing_helper && \
     chmod a+x /usr/local/bin/aws_signing_helper
+
+WORKDIR /usr/local/bin/
+
+RUN wget https://github.com/siderolabs/talos/releases/download/v${TALOS_VERSION}/talosctl-linux-${TARGETARCH} -O /usr/local/bin/talosctl-linux-${TARGETARCH} && \
+    chmod a+x /usr/local/bin/talosctl-linux-${TARGETARCH} && \
+    curl -L https://github.com/siderolabs/talos/releases/download/v${TALOS_VERSION}/sha512sum.txt | grep talosctl-linux-${TARGETARCH} | sha512sum -c - && \
+    mv /usr/local/bin/talosctl-linux-${TARGETARCH} /usr/local/bin/talosctl
+
+
 
 USER 1001
 
