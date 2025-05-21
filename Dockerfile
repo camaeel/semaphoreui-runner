@@ -45,8 +45,6 @@ RUN wget https://github.com/siderolabs/talos/releases/download/v${TALOS_VERSION}
     curl -L https://github.com/siderolabs/talos/releases/download/v${TALOS_VERSION}/sha512sum.txt | grep talosctl-linux-${TARGETARCH} | sha512sum -c - && \
     mv /usr/local/bin/talosctl-linux-${TARGETARCH} /usr/local/bin/talosctl
 
-
-
 USER 1001
 
 ENV TENV_AUTO_INSTALL=true
