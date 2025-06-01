@@ -29,7 +29,7 @@ RUN wget https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER
     rm /usr/local/bin/terraform /usr/local/bin/tofu && \
     apk add tenv --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing/ && \
     # gcompat is needed for aws_signing_helper to work
-    apk add aws-cli gcompat xorriso && \
+    apk add aws-cli gcompat xorriso jq && \
     case "${TARGETARCH}" in \
       amd64)  export AWS_ARCH="X86_64" ;; \
       arm64)  export AWS_ARCH="Aarch64" ;; \
@@ -37,6 +37,7 @@ RUN wget https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER
     esac && \
     wget https://rolesanywhere.amazonaws.com/releases/${AWS_SIGNING_HELPER_VERSION}/${AWS_ARCH}/Linux/aws_signing_helper -O /usr/local/bin/aws_signing_helper && \
     chmod a+x /usr/local/bin/aws_signing_helper && \
+    set -ex && \
     wget "https://github.com/camaeel/proxmox-oidc-credential-helper/releases/download/$(curl -s https://api.github.com/repos/camaeel/proxmox-oidc-credential-helper/releases/latest | jq -r '.tag_name')/proxmox-oidc-credential-helper_$(uname -o)_$(uname -m).tar.gz" -O proxmox-oidc-credential-helper.tar.gz && \
     tar -xzvf proxmox-oidc-credential-helper.tar.gz proxmox-oidc-credential-helper && \
     mv proxmox-oidc-credential-helper /usr/local/bin/
