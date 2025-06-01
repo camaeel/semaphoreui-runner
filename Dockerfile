@@ -36,18 +36,17 @@ RUN wget https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER
       *)      echo "Unsupported architecture: ${TARGETARCH}" && exit 1 ;; \
     esac && \
     wget https://rolesanywhere.amazonaws.com/releases/${AWS_SIGNING_HELPER_VERSION}/${AWS_ARCH}/Linux/aws_signing_helper -O /usr/local/bin/aws_signing_helper && \
-    chmod a+x /usr/local/bin/aws_signing_helper && \
-    set -ex && \
-    wget "https://github.com/camaeel/proxmox-oidc-credential-helper/releases/download/$(curl -s https://api.github.com/repos/camaeel/proxmox-oidc-credential-helper/releases/latest | jq -r '.tag_name')/proxmox-oidc-credential-helper_$(uname -o)_$(uname -m).tar.gz" -O proxmox-oidc-credential-helper.tar.gz && \
-    tar -xzvf proxmox-oidc-credential-helper.tar.gz proxmox-oidc-credential-helper && \
-    mv proxmox-oidc-credential-helper /usr/local/bin/
+    chmod a+x /usr/local/bin/aws_signing_helper
 
 WORKDIR /usr/local/bin/
 
 RUN wget https://github.com/siderolabs/talos/releases/download/v${TALOS_VERSION}/talosctl-linux-${TARGETARCH} -O /usr/local/bin/talosctl-linux-${TARGETARCH} && \
     chmod a+x /usr/local/bin/talosctl-linux-${TARGETARCH} && \
     curl -L https://github.com/siderolabs/talos/releases/download/v${TALOS_VERSION}/sha512sum.txt | grep talosctl-linux-${TARGETARCH} | sha512sum -c - && \
-    mv /usr/local/bin/talosctl-linux-${TARGETARCH} /usr/local/bin/talosctl
+    mv /usr/local/bin/talosctl-linux-${TARGETARCH} /usr/local/bin/talosctl && \
+    set -ex && \
+    wget "https://github.com/camaeel/proxmox-oidc-credential-helper/releases/download/$(curl -s https://api.github.com/repos/camaeel/proxmox-oidc-credential-helper/releases/latest | jq -r '.tag_name')/proxmox-oidc-credential-helper_${TARGETOS}_${TARGETARCH}.tar.gz" -O proxmox-oidc-credential-helper.tar.gz && \
+    tar -xzvf proxmox-oidc-credential-helper.tar.gz proxmox-oidc-credential-helper
 
 USER 1001
 
