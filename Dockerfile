@@ -23,9 +23,9 @@ USER root
 
 WORKDIR /tmp/packer
 
-RUN wget https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_linux_${TARGETARCH}.zip && \
-    unzip packer_${PACKER_VERSION}_linux_${TARGETARCH}.zip -d /usr/local/bin && \
-    rm packer_${PACKER_VERSION}_linux_${TARGETARCH}.zip && \
+RUN wget https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_${TARGETOS}_${TARGETARCH}.zip && \
+    unzip packer_${PACKER_VERSION}_${TARGETOS}_${TARGETARCH}.zip -d /usr/local/bin && \
+    rm packer_${PACKER_VERSION}_${TARGETOS}_${TARGETARCH}.zip && \
     chmod +x /usr/local/bin/packer && \
     rm /usr/local/bin/terraform /usr/local/bin/tofu && \
     apk add tenv --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing/ && \
@@ -41,13 +41,10 @@ RUN wget https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER
 
 WORKDIR /usr/local/bin/
 
-RUN wget https://github.com/siderolabs/talos/releases/download/v${TALOS_VERSION}/talosctl-linux-${TARGETARCH} -O /usr/local/bin/talosctl-linux-${TARGETARCH} && \
-    chmod a+x /usr/local/bin/talosctl-linux-${TARGETARCH} && \
-    curl -L https://github.com/siderolabs/talos/releases/download/v${TALOS_VERSION}/sha512sum.txt | grep talosctl-linux-${TARGETARCH} | sha512sum -c - && \
-    mv /usr/local/bin/talosctl-linux-${TARGETARCH} /usr/local/bin/talosctl && \
-    set -ex && \
-    wget "https://github.com/camaeel/proxmox-oidc-credential-helper/releases/download/$(curl -s https://api.github.com/repos/camaeel/proxmox-oidc-credential-helper/releases/latest | jq -r '.tag_name')/proxmox-oidc-credential-helper_${TARGETOS}_${TARGETARCH}.tar.gz" -O proxmox-oidc-credential-helper.tar.gz && \
-    tar -xzvf proxmox-oidc-credential-helper.tar.gz proxmox-oidc-credential-helper
+RUN wget https://github.com/siderolabs/talos/releases/download/v${TALOS_VERSION}/talosctl-${TARGETOS}-${TARGETARCH} -O /usr/local/bin/talosctl-${TARGETOS}-${TARGETARCH} && \
+    chmod a+x /usr/local/bin/talosctl-${TARGETOS}-${TARGETARCH} && \
+    curl -L https://github.com/siderolabs/talos/releases/download/v${TALOS_VERSION}/sha512sum.txt | grep talosctl-${TARGETOS}-${TARGETARCH} | sha512sum -c - && \
+    mv /usr/local/bin/talosctl-${TARGETOS}-${TARGETARCH} /usr/local/bin/talosctl
 
 USER 1001
 
