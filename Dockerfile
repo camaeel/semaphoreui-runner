@@ -12,7 +12,7 @@ ARG TOFU_VERSION=1.9.1
 # renovate: datasource=github-releases depName=terragrunt packageName=gruntwork-io/terragrunt
 ARG TERRAGRUNT_VERSION=0.80.2
 # renovate: datasource=github-releases depName=aws_signing_helper packageName=aws/rolesanywhere-credential-helper
-ARG AWS_SIGNING_HELPER_VERSION=1.6.0
+ARG AWS_SIGNING_HELPER_VERSION=1.7.0
 # renovate: datasource=github-releases depName=talosctl packageName=siderolabs/talos
 ARG TALOS_VERSION=1.10.2
 
