@@ -8,7 +8,7 @@ ARG TERRAFORM_VERSION=1.12.2
 # renovate: datasource=github-releases depName=packer packageName=hashicorp/packer
 ARG PACKER_VERSION=1.13.1
 # renovate: datasource=github-releases depName=opentofu packageName=opentofu/opentofu
-ARG TOFU_VERSION=1.9.1
+ARG TOFU_VERSION=1.10.1
 # renovate: datasource=github-releases depName=terragrunt packageName=gruntwork-io/terragrunt
 ARG TERRAGRUNT_VERSION=0.81.10
 # renovate: datasource=github-releases depName=aws_signing_helper packageName=aws/rolesanywhere-credential-helper
